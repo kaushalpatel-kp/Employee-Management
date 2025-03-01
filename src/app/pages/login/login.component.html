@@ -1,0 +1,17 @@
+<div class="parent">
+
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" [(ngModel)]="loginobj.EmailId" name="EmailId" required>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" [(ngModel)]="loginobj.Password" name="Password" required>
+          </div>
+          <button type="submit" (click)="onlogin()">Login</button>
+        </form>
+      </div>
+</div>
