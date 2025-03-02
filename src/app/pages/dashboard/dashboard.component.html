@@ -1,1 +1,33 @@
-<h1>{{ userlist| json}}</h1>
+<div class="spinner-border" role="status" *ngIf="isLoading">
+    <span class="sr-only"></span>
+  </div>
+
+<div class="container" *ngIf="!isLoading">
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Email</th>
+            <th scope="col">First</th>
+            <th scope="col">ProjetName</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of userlist">
+                <td>{{emp.userId}}</td>
+                <td>{{emp.emailId}}</td>
+                <td>{{emp.fullName}}</td>
+                <td>{{emp.projectName}}</td>  
+                <td>
+                 <button class="btn btn-info mr-3">Update</button>
+                 <button class="btn btn-danger ml-2">Delete</button>
+                 <button  class="btn btn-primary">View</button>
+                </td>    
+               
+               </tr>
+        </tbody>
+      </table>
+</div>
+
+<!-- <h1>{{ userlist| json}}</h1> -->

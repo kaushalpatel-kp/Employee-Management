@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component,inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component,inject,NgModule  } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -21,6 +23,12 @@ signupobj: any={
   
 }
 
+signupform: FormGroup= new FormGroup({
+  emailId: new FormControl("",[Validators.required]),
+  fullName: new FormControl("",[Validators.required]),
+  password: new FormControl("",[Validators.required,Validators.minLength(4)])
+})
+
 
 createUser(){
   this.http.post("https://projectapi.gerasim.in/api/UserApp/CreateNewUser",this.signupobj).subscribe((res:any)=>{
@@ -32,8 +40,13 @@ createUser(){
    }
   })
 }
+
+
+
   onsubmit(){
- this.createUser();
+    this.signupobj = this.signupform.value;
+this.createUser();
+
   }
 
   onlogin(){

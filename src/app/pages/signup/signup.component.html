@@ -2,23 +2,54 @@
 <!-- signup comment  -->
     <div class="login-container">
         <h1>signup</h1>
-        <form id="loginForm">
+        <form id="loginForm" [formGroup]="signupform">
 
             <div class="input-group">
                 <label for="fullName">Full name</label>
-                <input type="text" id="fullName" [(ngModel)]="signupobj.fullName" name="fullName" required>
-              </div>
+                <input type="text" id="fullName" formControlName="fullName" [(ngModel)]="signupobj.fullName" name="fullName" >
+                <div class="text-danger">
+                    @if (signupform.controls['fullName'].touched && signupform.controls['fullName'].errors?.['required']) {
+                        <span>Enter name</span>
+                    }
+        
+        
+                </div>
+            
+            </div>
 
-          <div class="input-group">
+          <div class="input-group" >
             <label for="username">Username</label>
-            <input type="text" id="username" [(ngModel)]="signupobj.emailId" name="emailId"  required>
-          </div>
+            <input type="email" id="emailId" formControlName="emailId" [(ngModel)]="signupobj.emailId" name="emailId"   >
+            <div class="text-danger">
+                @if (signupform.controls['emailId'].touched && signupform.controls['emailId'].errors?.['required']) {
+                    <span>Enter email</span>
+                }
+            </div>
+      
+            <!-- <div *ngIf="email.invalid && email.touched">
+            <span *ngIf="email.errors?.['required']">Email required</span>
+        </div>   -->
+        </div>
 
 
           <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" [(ngModel)]="signupobj.password" name="password" required>
-          </div>
+            <input type="password" id="password"   formControlName="password" [(ngModel)]="signupobj.password" name="password" >
+        <div class="text-danger">
+            @if (signupform.controls['password'].touched && signupform.controls['password'].errors?.['required']) {
+                <span>This is required</span>
+            }@else if(signupform.controls['password'].errors?.['minlength']){
+                <span>Min 4 Char required</span>
+            }
+
+
+        </div>
+            <!-- <div *ngIf="password.invalid && password.touched" >
+            <span *ngIf="password.errors?.['required']">Password is required</span>
+            <span *ngIf="password.errors?.['minlength']">Minimum length is 6 required</span>
+
+        </div>   -->
+        </div>
           <button type="submit" (click)="onsubmit()">Submit</button>
           <button type="submit" (click)="onlogin()">Already have an account? Log in</button>
         </form>
